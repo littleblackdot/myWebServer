@@ -1,5 +1,5 @@
-#include"Util.h"
 #include"EventLoop.h"
+#include"Util.h"
 #include<sys/eventfd.h>
 #include<functional>
 #include<iostream>
@@ -33,6 +33,7 @@ EventLoop::EventLoop()
         weakupChannel_->setReadHandler(std::bind(&EventLoop::handleRead, this));
         weakupChannel_->setConnHandler(std::bind(&EventLoop::handleConn, this));
         poller_->EpollAdd(weakupChannel_, 0);
+        std::cout<<"weakupFd "<< weakupFd_<<std::endl;
 }
 
 
@@ -54,6 +55,7 @@ void EventLoop::handleConn(){
 }
 
 void EventLoop::wakeup(){
+    //std::cout<<"weakup "<<weakupFd_<< std::endl;
     __uint64_t one = 1;
     ssize_t sum = writen(weakupFd_, (char*)&one, sizeof(one));
     if(sum != sizeof(one)){

@@ -1,5 +1,4 @@
 #include "Thread.h"
-#include "CurrentThread.h"
 #include <sys/prctl.h>
 #include<assert.h>
 
@@ -10,8 +9,14 @@ namespace CurrentThread{
     __thread const char* t_threadName = "default";
 }
 
+pid_t getTid() { return static_cast<pid_t>(syscall(SYS_gettid)); }
 
-
+void CurrentThread::cacheTid(){
+    if(t_cachedTid == 0){
+        t_cachedTid = getTid();
+        t_tidStringLength = snprintf(t_tidString, sizeof(t_tidString), "%5d ", t_cachedTid);
+    }
+}
 // 为了在线程中保留name,tid这些数据
 struct ThreadData{
     typedef std::function<void()> ThreadFunc;
@@ -24,7 +29,7 @@ struct ThreadData{
         : func_(func), name_(name), tId_(tId), latch_(latch) {}
     
     void runInThread(){
-        *tId_ = CurrentThread::getTid();
+        *tId_ = CurrentThread::tid();
         tId_ = nullptr;
         latch_->countDown();
         latch_ = nullptr;
@@ -72,7 +77,7 @@ void Thread::start(){
     if(pthread_create(&threadId_, NULL, startThread, (void*)data) == 0){ //create thread succcess
         latch_.wait();
         assert(tid_ > 0);
-        std::cout<<"in start" << std::endl;
+        //std::cout<<"in start" << std::endl;
     } else {
         started_ = false;
         delete data;

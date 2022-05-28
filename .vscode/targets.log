@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 22 22:08:44 2022
+# Make data base, printed on Sat May 28 19:29:50 2022
 
 # Variables
 
@@ -20,6 +20,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 VSCODE_AGENT_FOLDER = /home/little/.vscode-server
 # environment
 VSCODE_LOG_NATIVE = false
+# makefile (from 'Makefile', line 8)
+TARGET := WebServer
 # environment
 GTK3_MODULES = unity-gtk-module
 # automatic
@@ -42,6 +44,8 @@ CONFIG_SITE = /usr/share/site/x86_64-unknown-linux-gnu
 VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"42e84e0914b17800d483f69e299e1b00.zh-cn","_translationsConfigFile":"/home/little/.vscode-server/data/clp/42e84e0914b17800d483f69e299e1b00.zh-cn/tcf.json","_cacheRoot":"/home/little/.vscode-server/data/clp/42e84e0914b17800d483f69e299e1b00.zh-cn","_resolvedLanguagePackCoreLocation":"/home/little/.vscode-server/data/clp/42e84e0914b17800d483f69e299e1b00.zh-cn/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"/home/little/.vscode-server/data/clp/42e84e0914b17800d483f69e299e1b00.zh-cn/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
+# makefile (from 'Makefile', line 12)
+CFLAGS := -std=c++11 -g -Wall -O3 -D_PTHREADS
 # environment
 XDG_CONFIG_DIRS = /etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -50,6 +54,8 @@ MAKEFILE_LIST :=  Makefile
 MINICOM = -c on
 # 'override' directive
 GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 13)
+CXXFLAGS := -std=c++11 -g -Wall -O3 -D_PTHREADS
 # environment
 XDG_DATA_DIRS = /home/little/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 # environment
@@ -60,12 +66,14 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_VERBOSE_LOGGING = true
 # environment
 MACHTYPE = x86_64-suse-linux
+# makefile (from 'Makefile', line 6)
+OBJS := WebServer.o Util.o Time.o Thread.o HttpData.o EventLoopThreadPool.o EventLoopThread.o EventLoop.o Epoll.o CountDownLatch.o CodeConvert.o Channel.o
 # environment
 LESSOPEN = lessopen.sh %s
 # environment
 VSCODE_CWD = /home/little
 # environment
-SSH_CONNECTION = 192.168.200.1 11794 192.168.200.128 22
+SSH_CONNECTION = 192.168.200.1 6673 192.168.200.128 22
 # environment
 PATH = /home/little/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/home/little/bin:/usr/local/bin:/usr/bin:/bin
 # environment
@@ -79,7 +87,7 @@ JAVA_BINDIR = /usr/lib64/jvm/jre-11-openjdk/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-a4afb701-e08c-45cb-bbd2-5e48334c98c6.sock
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-fb966aef-8841-4211-b109-9e27fab52024.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -140,20 +148,26 @@ XKEYSYMDB = /usr/X11R6/lib/X11/XKeysymDB
 SHLVL = 5
 # environment
 JRE_HOME = /usr/lib64/jvm/java-11-openjdk-11
+# makefile (from 'Makefile', line 9)
+CC := g++
 # environment
 WINDOWMANAGER = /usr/bin/startplasma-x11
 # environment
 LESS_ADVANCED_PREPROCESSOR = no
 # environment
 JAVA_HOME = /usr/lib64/jvm/jre-11-openjdk
+# 'override' directive (from 'Makefile', line 5)
+SOURCE := WebServer.cpp Util.cpp Time.cpp Thread.cpp HttpData.cpp EventLoopThreadPool.cpp EventLoopThread.cpp EventLoop.cpp Epoll.cpp CountDownLatch.cpp CodeConvert.cpp Channel.cpp
 # environment
-XDG_SESSION_ID = 2
+XDG_SESSION_ID = 24
 # environment
 USER = little
 # environment
 LS_OPTIONS = -N --color=none -T 0
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 11)
+INCLUDE := -I./usr/local/lib
 # environment
 LESS = -M -I -R
 # automatic
@@ -175,7 +189,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 192.168.200.1 11794 22
+SSH_CLIENT = 192.168.200.1 6673 22
 # environment
 MAIL = /var/spool/mail/little
 # automatic
@@ -200,8 +214,12 @@ ALSA_CONFIG_PATH = /etc/alsa-pulse.conf
 PAGER = less
 # environment
 LC_ALL = C
+# makefile (from 'Makefile', line 3)
+MAINSOURCE := main.cpp 
 # environment
 HOSTTYPE = x86_64
+# makefile (from 'Makefile', line 10)
+LIBS := -lpthread
 # automatic
 ^F = $(notdir $^)
 # environment
@@ -233,7 +251,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 HOST = localhost.localdomain
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=10/135=7%
+# Load=120/1024=12%, Rehash=0, Collisions=14/154=9%
 
 # Pattern-specific Variable Values
 
@@ -241,9 +259,9 @@ HOST = localhost.localdomain
 
 # Directories
 
-# . (device 70, inode 848769): 36 files, no impossibilities.
+# . (device 70, inode 848769): 53 files, no impossibilities.
 
-# 36 files, no impossibilities in 1 directories.
+# 53 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -251,17 +269,121 @@ HOST = localhost.localdomain
 
 # Files
 
-# Not a target:
-all:
+all: WebServer
+#  Phony target (prerequisite of .PHONY).
 #  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+.PHONY: objs clean veryclean rebuild all tests debug
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Epoll.o:
 #  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:31.479969049
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+WebServer.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:27.019868505
+#  File has been updated.
+#  Successfully updated.
+
+WebServer: WebServer.o Util.o Time.o Thread.o HttpData.o EventLoopThreadPool.o EventLoopThread.o EventLoop.o Epoll.o CountDownLatch.o CodeConvert.o Channel.o main.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-25 19:37:32.583993939
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 30):
+	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+
+tests:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 21:37:54.756195602
+#  Last modified 2022-05-23 00:47:26.153649224
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+CountDownLatch.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:31.639972657
+#  File has been updated.
+#  Successfully updated.
+
+rebuild: veryclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+debug:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 27):
+	@echo $(SOURCE)
+
+# Not a target:
+EventLoopThread.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:30.3599438
+#  File has been updated.
+#  Successfully updated.
+
+objs: WebServer.o Util.o Time.o Thread.o HttpData.o EventLoopThreadPool.o EventLoopThread.o EventLoop.o Epoll.o CountDownLatch.o CodeConvert.o Channel.o
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+Util.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:27.259873917
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+EventLoopThreadPool.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:29.983935325
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+CodeConvert.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:31.855977527
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Channel.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:32.095982938
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Time.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:27.759885188
 #  File has been updated.
 #  Successfully updated.
 
@@ -271,23 +393,65 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 22):
+	find . -name '*.o' | xargs rm -f
+
+veryclean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 24):
+	find . -name '*.o' | xargs rm -f
+	find . -name $(TARGET) | xargs rm -f
+
+# Not a target:
+HttpData.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:29.547925497
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Thread.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:28.007890779
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+main.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:32.459991143
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+EventLoop.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 19:37:30.939956875
+#  File has been updated.
+#  Successfully updated.
+
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/14=0%
+# Load=25/1024=2%, Rehash=0, Collisions=0/77=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 41 / storage = 479 B / avg = 11 B
- 
-make: *** No rule to make target 'all'.  Stop.
+# strcache buffers: 1 (0) / strings = 65 / storage = 714 B / avg = 10 B
+# current buf: size = 8162 B / used = 714 B / count = 65 / avg = 10 B
 
-# current buf: size = 8162 B / used = 479 B / count = 41 / avg = 11 B
-
-# strcache performance: lookups = 45 / hit rate = 8%
+# strcache performance: lookups = 113 / hit rate = 42%
 # hash-table stats:
-# Load=41/8192=1%, Rehash=0, Collisions=2/45=4%
-# Finished Make data base on Sun May 22 22:08:44 2022
+# Load=65/8192=1%, Rehash=0, Collisions=1/113=1%
+# Finished Make data base on Sat May 28 19:29:50 2022
 
  

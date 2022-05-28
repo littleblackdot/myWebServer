@@ -8,6 +8,7 @@
 #include <string>
 #include "CountDownLatch.h"
 #include "noncopyable.h"
+#include "CurrentThread.h"
 
 class Thread : noncopyable{
 typedef std::function<void()> ThreadFunc;

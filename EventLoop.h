@@ -1,22 +1,23 @@
 #pragma once
+
 #include<functional>
 #include<vector>
 #include<assert.h>
 #include<sys/socket.h>
+#include<memory>
 #include "noncopyable.h"
 #include "Channel.h"
-#include "Epoll.h"
 #include "MutexLock.h"
 #include "CurrentThread.h"
+#include "Epoll.h"
 
 
-class Epoll;
+
+
 
 class EventLoop : noncopyable{
-
-typedef std::function<void()> Functor;
-
 private:
+    typedef std::function<void()> Functor;
     bool isLooping_;
     bool isQuit_;
     bool eventHandling_;

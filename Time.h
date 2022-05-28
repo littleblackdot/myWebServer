@@ -1,9 +1,11 @@
 #pragma once
+
 #include<queue>
 #include<memory>
 #include<deque>
-#include"HttpData.h"
 
+class HttpData;
+typedef std::shared_ptr<HttpData> SP_HttpData; 
 
 class TimeNode{
 private:
@@ -41,3 +43,5 @@ public:
     void addTimeNode(SP_HttpData SP_HttpData, int timeout);
     void handleExpiredTimeNode();
 };
+
+

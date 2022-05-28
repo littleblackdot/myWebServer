@@ -1,7 +1,7 @@
 #pragma once
 
 #include<memory>
-#include"Channel.h"
+#include "Channel.h"
 #include "EventLoop.h"
 #include "EventLoopThreadPool.h"
 
@@ -22,5 +22,5 @@ public:
     EventLoop* getLoop() const {return mainLoop_; }
     void start();
     void handNewConn();
-    void handThisConn() {mainLoop_-> updatePoller(acceptChannel_, 0);}
+    void handThisConn() { mainLoop_-> updatePoller(acceptChannel_, 0); }
 };

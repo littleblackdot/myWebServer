@@ -464,33 +464,6 @@ WebServer.cpp.s:
 	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/WebServer.cpp.s
 .PHONY : WebServer.cpp.s
 
-demo.o: demo.cpp.o
-
-.PHONY : demo.o
-
-# target to build an object file
-demo.cpp.o:
-	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/demo.cpp.o
-.PHONY : demo.cpp.o
-
-demo.i: demo.cpp.i
-
-.PHONY : demo.i
-
-# target to preprocess a source file
-demo.cpp.i:
-	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/demo.cpp.i
-.PHONY : demo.cpp.i
-
-demo.s: demo.cpp.s
-
-.PHONY : demo.s
-
-# target to generate assembly for a file
-demo.cpp.s:
-	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/demo.cpp.s
-.PHONY : demo.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -563,9 +536,6 @@ help:
 	@echo "... WebServer.o"
 	@echo "... WebServer.i"
 	@echo "... WebServer.s"
-	@echo "... demo.o"
-	@echo "... demo.i"
-	@echo "... demo.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -9,7 +9,6 @@ class EventLoop;
 class HttpData;
 
 
-
 class Channel : noncopyable {
 
 typedef std::function<void()> CallBack;

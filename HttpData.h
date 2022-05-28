@@ -3,9 +3,12 @@
 #include<unistd.h>
 #include<unordered_map>
 #include<map>
-#include "EventLoop.h"
-#include "Channel.h"
 
+#include "Time.h"
+
+
+class EventLoop;
+class Channel;
 
 enum ProcessState{
     STATE_PARSE_URI = 1,
@@ -76,6 +79,8 @@ public:
     static std::string getMime(const std::string &suffix);
 };
 
+
+class TimeNode;
 
 class HttpData : public std::enable_shared_from_this<HttpData>{
 private:

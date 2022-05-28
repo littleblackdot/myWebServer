@@ -1,18 +1,18 @@
+
 #include<functional>
 #include<iostream>
-
 #include<cstring>
-
 #include<unistd.h>
 #include<sys/types.h>
 #include<sys/stat.h>
 #include<fcntl.h>
 #include<sys/mman.h>
-#include "HttpData.h"
+
+#include"HttpData.h"
 #include"EventLoop.h"
-#include"Time.h"
-#include"Util.h"
-#include"CodeConvert.h"
+#include "Channel.h"
+#include "Util.h"
+#include "CodeConvert.h"
 
 pthread_once_t MimeType::onceControl = PTHREAD_ONCE_INIT;
 std::unordered_map<std::string, std::string> MimeType::mime;
@@ -40,6 +40,10 @@ void MimeType::init() {
   mime[".css"] = "text/css";
   mime[".js"] = "text/js";
 }
+
+
+
+
 
 std::string MimeType::getMime(const std::string &suffix){
     pthread_once(&onceControl, MimeType::init);
@@ -73,7 +77,6 @@ void  HttpData::reset(){
     separateTime();
     fileName_.clear();
     readPos_ = 0;
-    fd_ = 0;
     path_.clear();
     headers_.clear();
     processState_ = STATE_PARSE_URI;
@@ -88,10 +91,6 @@ void HttpData::separateTime(){
     }
 }
 
-void HttpData::handleNewConnection(){
-    channel_->setEvents(DEFAULT_EVENT);
-    loop_->addToPoller(channel_, DEFAULT_EXPIRED_TIME);
-}
 
 
 HeaderState HttpData::parseHeaders(){
@@ -212,6 +211,7 @@ URIState HttpData::parseUri(){
     // 读到完整的请求行再开始解析请求
     size_t pos = str.find('\r', readPos_);
     if(pos < 0){
+        std::cout<<"PARSE_URI_AGAIN"<<std::endl;
         return PARSE_URI_AGAIN;
     }
 
@@ -232,10 +232,10 @@ URIState HttpData::parseUri(){
         httpMethod_ = METHOD_GET;
     } else if (posPost >= 0) {
         pos = posPost;
-         httpMethod_ = METHOD_POST;
+        httpMethod_ = METHOD_POST;
     } else if (posHead >= 0) {
         pos = posHead;
-         httpMethod_ = METHOD_HEAD;
+        httpMethod_ = METHOD_HEAD;
     } else {
         return PARSE_URI_ERROR;
     }
@@ -256,6 +256,9 @@ URIState HttpData::parseUri(){
                 size_t __pos = fileName_.find('?');
                 if (__pos >= 0) {
                     fileName_ = fileName_.substr(0, __pos);
+                }
+                if(fileName_[(fileName_.size()-1)] == '/'){
+                    fileName_ += "index.html";
                 }
             } else {
                 fileName_ = "index.html";
@@ -290,10 +293,14 @@ AnalysisState HttpData::AnalysisRequest(){
         //POST不做处理
     }else if(httpMethod_ == METHOD_GET || httpMethod_ == METHOD_HEAD){
         std::string header;
+        if(httpVersion_ == HTTP_10)
+            header += "HTTP/1.0 200 OK\r\n";
+        else{
+            header += "HTTP/1.1 200 OK\r\n";
+        }
         if(headers_.find("Connection") != headers_.end() && 
             (headers_["Connection"] == "Keep-Alive" || headers_["Connection"] == "Keep-alive")) {
                 keepAlive_ = true;
-                header += "HTTP/1.1 200 OK\r\n";
                 header += std::string("Connection: Keep-Alive\r\n") + "Keep-Alive: timeout=" +
                             std::to_string(DEFAULT_KEEP_ALIVE_TIME) + "\r\n";
         }
@@ -307,10 +314,22 @@ AnalysisState HttpData::AnalysisRequest(){
 
         // echo test
         if (fileName_ == "hello") {
-            outBuffer_ = "HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
+            //std::cout<<"echo hello"<<std::endl;
+            outBuffer_ = header + "Content-type: text/plain\r\n\r\nHello World";//"HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
             return ANALYSIS_SUCCESS;
         }
 
+        // if (fileName_ == "favicon.ico" || fileName_ == "favicon.png") {
+        //     header += "Content-Type: image/png\r\n";
+        //     header += "Content-Length: " + std::to_string(sizeof favicon) + "\r\n";
+        //     header += "Server: LittleBlackDot's Web Server\r\n";
+
+        //     header += "\r\n";
+        //     outBuffer_ += header;
+        //     outBuffer_ += std::string(favicon, favicon + sizeof favicon);
+        //     ;
+        //     return ANALYSIS_SUCCESS;
+        // }
         //处理url中的'%'编码
         int u8Start = fileName_.find('%');
         if(u8Start > 0){
@@ -320,6 +339,8 @@ AnalysisState HttpData::AnalysisRequest(){
             fileName_ = fileName_.substr(0, u8Start) + fileName_chPart + fileName_.substr(u8End);
         }
 
+        std::string root = "./hexo/";
+        fileName_ = root + fileName_;
         struct stat goalFileState;
         if(stat(fileName_.c_str(), &goalFileState) < 0){
             std::cout<< "find file: " + fileName_ + " fail" << std::endl;
@@ -365,6 +386,7 @@ void HttpData::handleRead(){
         bool isEnd = false;
         int readNum = readn(fd_, inBuffer_, isEnd);
         std::cout<< "Request: "<< inBuffer_ << std::endl;
+        std::cout<< "from--------"<< fd_ << std::endl;
         if(connectionState_ == H_DISCONNECTING){
             inBuffer_.clear();
             break;
@@ -388,7 +410,7 @@ void HttpData::handleRead(){
 
         if(processState_ == STATE_PARSE_URI){
             URIState flag = this->parseUri();
-            if(flag == PARSE_HEADER_AGAIN){
+            if(flag == PARSE_URI_AGAIN){
                 break;
             }else if(flag == PARSE_URI_ERROR) {
                 perror("HttpData::handelRead: parseUri fail");
@@ -457,9 +479,11 @@ void HttpData::handleRead(){
         this->reset();
         if(inBuffer_.size() > 0){
             if(connectionState_ != H_DISCONNECTING){
+                std::cout<<"read again"<<std::endl;
                 handleRead();
             }
         }
+
     }else if(!err_ && connectionState_ != H_DISCONNECTED){
         events |= EPOLLIN;      
     }
@@ -468,14 +492,19 @@ void HttpData::handleRead(){
 
 
 void  HttpData::handleWrite(){
+    //std::cout<<"handleWrite for fd "<< fd_ <<std::endl;
     if(!err_ && connectionState_ != H_DISCONNECTED) {
         __uint32_t &events = channel_->getEvents();
-        if(writen(fd_, outBuffer_) < 0){
+        int sendNum = 0;
+        //std::cout<< "out len" << outBuffer_.size()<< std::endl;
+        if((sendNum = writen(fd_, outBuffer_)) < 0){
             perror("HttpData::handleWrite->writen");
             events = 0;
             err_ = true;
         }
+        //std::cout<< "sendNum "<< sendNum << std::endl;
         if(outBuffer_.size() > 0){
+            std::cout<< "content left" << std::endl;
             events |= EPOLLOUT;
         }
     }
@@ -496,7 +525,7 @@ void HttpData::handleConn(){
             }
             events |= EPOLLET;
             loop_->updatePoller(channel_, timeout);
-        }else {
+        } else {
             int timeout = keepAlive_ ? DEFAULT_KEEP_ALIVE_TIME : (DEFAULT_KEEP_ALIVE_TIME >> 1);
             events |= ( EPOLLIN | EPOLLET );
             loop_->updatePoller(channel_, timeout);
@@ -534,6 +563,7 @@ void HttpData::handleErr(int fd, int errCode, std::string msg){
 void HttpData::closeConnection(){
     connectionState_ = H_DISCONNECTED;
     std::shared_ptr<HttpData> guard(shared_from_this()); //保证 loop_->removeFromPoller(channel_);执行完本HttpData对象不会因为引用计数为零被释放
+    //shutdown(fd_, SHUT_RDWR);
     loop_->removeFromPoller(channel_);
 }
 
@@ -541,7 +571,6 @@ void HttpData::handleNewConnection(){
     channel_->setEvents(DEFAULT_EVENT);
     loop_->addToPoller(channel_, DEFAULT_EXPIRED_TIME);
 }
-
 
 
 

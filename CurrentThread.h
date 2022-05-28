@@ -1,9 +1,11 @@
-#pragma once
+#ifndef CURRENTTHREAD_H__
+#define CURRENTTHREAD_H__
+
 #include <stdint.h>
 #include<iostream>
 #include<unistd.h>
 #include<sys/syscall.h>
-
+#include <stdint.h>
 
 namespace CurrentThread {
 // internal
@@ -12,14 +14,9 @@ extern __thread char t_tidString[32];
 extern __thread int t_tidStringLength;
 extern __thread const char* t_threadName;
 
-pid_t getTid() { return static_cast<pid_t>(syscall(SYS_gettid)); }
 
-void cacheTid(){
-    if(t_cachedTid == 0){
-        t_cachedTid = getTid();
-        t_tidStringLength = snprintf(t_tidString, sizeof(t_tidString), "%5d ", t_cachedTid);
-    }
-}
+void cacheTid();
+
 inline int tid() {
   if (__builtin_expect(t_cachedTid == 0, 0)) {
     cacheTid();
@@ -38,4 +35,8 @@ inline int tidStringLength()  // for logging
 }
 
 inline const char* name() { return t_threadName; }
+
 }
+
+
+#endif

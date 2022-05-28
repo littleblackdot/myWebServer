@@ -18,7 +18,7 @@ ssize_t readn(int fd, void *buff, size_t n){
     ssize_t readSum = 0;
     char *ptr = (char*)buff; 
     while(nleft > 0){
-        if(nread = read(fd, ptr, nleft) < 0){
+        if((nread = read(fd, ptr, nleft)) < 0){
             if(errno == EINTR){  //系统调用被中断打断
                 continue;
                 //nread = 0;
@@ -91,7 +91,7 @@ ssize_t writen(int fd, void *buff, size_t n){
 }
 
 ssize_t writen(int fd, std::string &outBuffer){
-    int writenSum = writen(fd, (void*)outBuffer.c_str(), outBuffer.size());
+    size_t writenSum = writen(fd, (void*)outBuffer.c_str(), outBuffer.size());
     if(writenSum  < 0) {
         return -1;
     } else if(writenSum == outBuffer.size()){

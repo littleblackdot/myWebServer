@@ -4,11 +4,15 @@
 #include<memory>
 #include<unordered_map>
 #include<vector>
-#include "Channel.h"
 #include "Time.h"
+#include "noncopyable.h"
 
-//class TimerManager;
+class HttpData;
+class Channel;
 
+
+typedef std::shared_ptr<HttpData> SP_HttpData;
+typedef std::shared_ptr<Channel> SP_Channel;
 
 class Epoll : noncopyable {
 public:

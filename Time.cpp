@@ -1,7 +1,8 @@
 #include"Time.h"
-
+#include"HttpData.h"
 #include<sys/time.h>
 #include<unistd.h>
+
 
 TimeNode:: TimeNode(SP_HttpData httpData, int timeout){
     spHttpData_ = httpData;

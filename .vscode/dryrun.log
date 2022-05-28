@@ -1,6 +1,18 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/little/little/Code_C++/myWebServer'
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o WebServer.o WebServer.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o Util.o Util.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o Time.o Time.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o Thread.o Thread.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o HttpData.o HttpData.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o EventLoopThreadPool.o EventLoopThreadPool.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o EventLoopThread.o EventLoopThread.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o EventLoop.o EventLoop.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o Epoll.o Epoll.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o CountDownLatch.o CountDownLatch.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o CodeConvert.o CodeConvert.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o Channel.o Channel.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS   -c -o main.o main.cpp
+g++ -std=c++11 -g -Wall -O3 -D_PTHREADS -o WebServer WebServer.o Util.o Time.o Thread.o HttpData.o EventLoopThreadPool.o EventLoopThread.o EventLoop.o Epoll.o CountDownLatch.o CodeConvert.o Channel.o main.o  -lpthread
 make: Leaving directory '/home/little/little/Code_C++/myWebServer'
  
-make: *** No targets.  Stop.
-

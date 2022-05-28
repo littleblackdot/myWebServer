@@ -11,7 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/WebServer.dir/Time.cpp.o"
   "CMakeFiles/WebServer.dir/Util.cpp.o"
   "CMakeFiles/WebServer.dir/WebServer.cpp.o"
-  "CMakeFiles/WebServer.dir/demo.cpp.o"
   "CMakeFiles/WebServer.dir/main.cpp.o"
   "WebServer"
   "WebServer.pdb"

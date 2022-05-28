@@ -16,13 +16,13 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/little/little/Code_C++/myWebServer/Time.cpp" "/home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir/Time.cpp.o"
   "/home/little/little/Code_C++/myWebServer/Util.cpp" "/home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir/Util.cpp.o"
   "/home/little/little/Code_C++/myWebServer/WebServer.cpp" "/home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir/WebServer.cpp.o"
-  "/home/little/little/Code_C++/myWebServer/demo.cpp" "/home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir/demo.cpp.o"
   "/home/little/little/Code_C++/myWebServer/main.cpp" "/home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../."
   )
 
 # Targets to which this target links.

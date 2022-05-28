@@ -1,4 +1,6 @@
 #include "Epoll.h"
+#include "Channel.h"
+#include "HttpData.h"
 #include <assert.h>
 #include <errno.h>
 #include <netinet/in.h>
@@ -7,12 +9,9 @@
 #include <sys/socket.h>
 #include <deque>
 #include <queue>
-#include "Util.h"
-
 #include <arpa/inet.h>
 #include <iostream>
 
-#include"Channel.h"
 
 const int EVENTSSUM = 4096;
 const int EPOLLWAIT_TIME = 10000;
@@ -71,7 +70,7 @@ void Epoll::EpollDel(SP_Channel channel) {
 
 std::vector<SP_Channel> Epoll::poll(){
     while(true){
-        int eventCount = epoll_wait(epollFd_, &*events_.begin(), EVENTSSUM, EPOLLWAIT_TIME);
+        int eventCount = epoll_wait(epollFd_, &*events_.begin(), events_.size(), EPOLLWAIT_TIME);
         if(eventCount < 0){
             perror("epoll wait err");
         }
@@ -106,3 +105,5 @@ void Epoll::addTimeNode(SP_Channel channel, int timeout){
         std::cout<<"timer add fail"<<std::endl;
     }
 }
+
+void Epoll::handleExpired() { timeNodeManager_.handleExpiredTimeNode(); }

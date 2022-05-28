@@ -2,11 +2,33 @@ cmake_minimum_required(VERSION 2.8)
 
 project(WebServer CXX)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
 
-aux_source_directory(. DIR_SRCS)
+set(CXX_FLAGS
+    -g
+    -Wall
+    -std=c++11
+    -D_PTHREADS
+    -Wno-unused-parameter
+)
 
-add_executable(WebServer ${DIR_SRCS})
+set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O0")
 
+aux_source_directory(. SRCS)
+
+string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
+string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
+
+message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
+
+
+
+
+add_executable(WebServer ${SRCS})
+
+target_include_directories(WebServer PUBLIC ./)
 target_link_libraries(WebServer pthread)
