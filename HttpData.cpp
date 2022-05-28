@@ -13,6 +13,7 @@
 #include "Channel.h"
 #include "Util.h"
 #include "CodeConvert.h"
+#include "log/Log.h"
 
 pthread_once_t MimeType::onceControl = PTHREAD_ONCE_INIT;
 std::unordered_map<std::string, std::string> MimeType::mime;
@@ -211,7 +212,7 @@ URIState HttpData::parseUri(){
     // 读到完整的请求行再开始解析请求
     size_t pos = str.find('\r', readPos_);
     if(pos < 0){
-        std::cout<<"PARSE_URI_AGAIN"<<std::endl;
+        //LOG<<"PARSE_URI_AGAIN"<<std::endl;
         return PARSE_URI_AGAIN;
     }
 
@@ -315,7 +316,8 @@ AnalysisState HttpData::AnalysisRequest(){
         // echo test
         if (fileName_ == "hello") {
             //std::cout<<"echo hello"<<std::endl;
-            outBuffer_ = header + "Content-type: text/plain\r\n\r\nHello World";//"HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
+            outBuffer_ = header + "Content-type: text/plain\r\n"
+            "Content-Length: " + "11" + "\r\n"+"\r\nHello World";//"HTTP/1.1 200 OK\r\nContent-type: text/plain\r\n\r\nHello World";
             return ANALYSIS_SUCCESS;
         }
 
@@ -330,6 +332,8 @@ AnalysisState HttpData::AnalysisRequest(){
         //     ;
         //     return ANALYSIS_SUCCESS;
         // }
+
+
         //处理url中的'%'编码
         int u8Start = fileName_.find('%');
         if(u8Start > 0){
@@ -385,8 +389,8 @@ void HttpData::handleRead(){
     do{
         bool isEnd = false;
         int readNum = readn(fd_, inBuffer_, isEnd);
-        std::cout<< "Request: "<< inBuffer_ << std::endl;
-        std::cout<< "from--------"<< fd_ << std::endl;
+        LOG << "Request: "<< inBuffer_;
+        //std::cout<< "from--------"<< fd_ << std::endl;
         if(connectionState_ == H_DISCONNECTING){
             inBuffer_.clear();
             break;
@@ -479,7 +483,7 @@ void HttpData::handleRead(){
         this->reset();
         if(inBuffer_.size() > 0){
             if(connectionState_ != H_DISCONNECTING){
-                std::cout<<"read again"<<std::endl;
+                //std::cout<<"read again"<<std::endl;
                 handleRead();
             }
         }
@@ -504,7 +508,7 @@ void  HttpData::handleWrite(){
         }
         //std::cout<< "sendNum "<< sendNum << std::endl;
         if(outBuffer_.size() > 0){
-            std::cout<< "content left" << std::endl;
+            //std::cout<< "content left" << std::endl;
             events |= EPOLLOUT;
         }
     }

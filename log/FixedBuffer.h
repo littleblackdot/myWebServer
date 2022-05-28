@@ -1,5 +1,8 @@
 #pragma once
 #include<unistd.h>
+#include<cstring>
+#include<string>
+#include "../noncopyable.h"
 
 const int kSmallBuffer = 4000;
 const int kLargeBuffer = 4000 * 1000;

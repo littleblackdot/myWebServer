@@ -7,6 +7,7 @@
 #include <cstring>
 #include "Util.h"
 #include "HttpData.h"
+#include "log/Log.h"
 
 WebServer::WebServer(EventLoop* loop, int threadNum, int port)
     : mainLoop_(loop),
@@ -16,7 +17,7 @@ WebServer::WebServer(EventLoop* loop, int threadNum, int port)
     acceptChannel_(new Channel(loop)),
     port_(port),
     listenFd_(createListenSocket(port)){
-    std::cout<< "listenFd: "<<listenFd_ << std::endl;
+    //std::cout<< "listenFd: "<<listenFd_ << std::endl;
     acceptChannel_->setFd(listenFd_);
     handle_for_sigpipe();
     if(setSocketNonBlocking(listenFd_) < 0){
@@ -43,8 +44,8 @@ void WebServer::handNewConn(){
     while( (newConnfd = accept(listenFd_, (struct sockaddr*)&clientAddr, &clientAddrLen)) > 0){
         
         EventLoop* tmpLoop = evLoopThreadPool_->getNextLoop();
-        std::cout<< "New connection from " << inet_ntoa(clientAddr.sin_addr) << ":"
-        << ntohs(clientAddr.sin_port)<<" with sockfd: "<< newConnfd<<std::endl;
+        LOG << "New connection from " << inet_ntoa(clientAddr.sin_addr) << ":"
+                << ntohs(clientAddr.sin_port);
         if(newConnfd >= MAXFDS ){
             close(newConnfd);
             std::cout<< "no more client" << std::endl;

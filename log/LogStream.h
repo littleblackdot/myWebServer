@@ -8,7 +8,7 @@
 
 
 class LogStream : noncopyable {
- public:
+public:
   typedef FixedBuffer<kSmallBuffer> Buffer;
 
   LogStream& operator<<(bool v) {

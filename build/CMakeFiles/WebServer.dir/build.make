@@ -276,6 +276,7 @@ WebServer: CMakeFiles/WebServer.dir/Util.cpp.o
 WebServer: CMakeFiles/WebServer.dir/WebServer.cpp.o
 WebServer: CMakeFiles/WebServer.dir/main.cpp.o
 WebServer: CMakeFiles/WebServer.dir/build.make
+WebServer: log/libLogUtil.a
 WebServer: CMakeFiles/WebServer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/little/little/Code_C++/myWebServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable WebServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/WebServer.dir/link.txt --verbose=$(VERBOSE)

@@ -27,4 +27,4 @@ public:
     static std::string getLogFileName() { return logFileName_; }
 };
 
-#define LOG Logger(__FILE__, __LINE__).stream();
+#define LOG Logger(__FILE__, __LINE__).stream()

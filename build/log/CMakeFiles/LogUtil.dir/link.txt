@@ -1,0 +1,2 @@
+/usr/bin/ar qc libLogUtil.a  CMakeFiles/LogUtil.dir/AsynLog.cpp.o CMakeFiles/LogUtil.dir/FileUtil.cpp.o CMakeFiles/LogUtil.dir/Log.cpp.o CMakeFiles/LogUtil.dir/LogFile.cpp.o CMakeFiles/LogUtil.dir/LogStream.cpp.o
+/usr/bin/ranlib libLogUtil.a

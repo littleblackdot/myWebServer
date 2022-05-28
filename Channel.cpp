@@ -25,18 +25,18 @@ void Channel::handEvent(){
     }
     if(revents_ & (EPOLLIN | EPOLLPRI | EPOLLRDHUP)){
         if(readHandler_){     //EPOLLRDHUP: 关闭读(对端调用close 或者 shutdown(SHUT_WR))，在读一次清空缓冲区
-            std::cout<<"handle read for " <<fd_ << std::endl; 
+            //std::cout<<"handle read for " <<fd_ << std::endl; 
             readHandler_();   //EPOLLPRI： 表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）
         } 
     }
     if(revents_ & EPOLLOUT){
         if(writeHandler_){
-            std::cout<<"handle write for " << fd_ << std::endl;
+            //std::cout<<"handle write for " << fd_ << std::endl;
             writeHandler_();
         }
     }
     if(connHandler_){
-        std::cout<<"handle conn for " <<fd_ << std::endl;
+        //std::cout<<"handle conn for " <<fd_ << std::endl;
         connHandler_();
     }
 }

@@ -1,3 +1,6 @@
 /home/little/little/Code_C++/myWebServer/build/CMakeFiles/rebuild_cache.dir
 /home/little/little/Code_C++/myWebServer/build/CMakeFiles/edit_cache.dir
 /home/little/little/Code_C++/myWebServer/build/CMakeFiles/WebServer.dir
+/home/little/little/Code_C++/myWebServer/build/log/CMakeFiles/rebuild_cache.dir
+/home/little/little/Code_C++/myWebServer/build/log/CMakeFiles/edit_cache.dir
+/home/little/little/Code_C++/myWebServer/build/log/CMakeFiles/LogUtil.dir

@@ -3,7 +3,7 @@
 #include"LogFile.h"
 
 
-AsynLog::AsynLog(const std::string &logFileName, int flushInterval = 2)
+AsynLog::AsynLog(const std::string &logFileName, int flushInterval)
     : flushInterval_(flushInterval), 
       running_(false),
       logFileName_(logFileName),
@@ -67,7 +67,7 @@ void AsynLog::threadFunc(){
         }
 
         assert(!buffersToWrite.empty());
-        
+
         //日志堆积过多直接丢弃
         if(buffersToWrite.size() > 25){
             buffersToWrite.erase(buffersToWrite.begin() + 2, buffersToWrite.end());

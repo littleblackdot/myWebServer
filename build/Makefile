@@ -140,6 +140,19 @@ WebServer/fast:
 	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/build
 .PHONY : WebServer/fast
 
+#=============================================================================
+# Target rules for targets named LogUtil
+
+# Build rule for target.
+LogUtil: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LogUtil
+.PHONY : LogUtil
+
+# fast build rule for target.
+LogUtil/fast:
+	$(MAKE) -f log/CMakeFiles/LogUtil.dir/build.make log/CMakeFiles/LogUtil.dir/build
+.PHONY : LogUtil/fast
+
 Channel.o: Channel.cpp.o
 
 .PHONY : Channel.o
@@ -499,6 +512,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... LogUtil"
 	@echo "... WebServer"
 	@echo "... Channel.o"
 	@echo "... Channel.i"

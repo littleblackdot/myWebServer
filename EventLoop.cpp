@@ -33,7 +33,7 @@ EventLoop::EventLoop()
         weakupChannel_->setReadHandler(std::bind(&EventLoop::handleRead, this));
         weakupChannel_->setConnHandler(std::bind(&EventLoop::handleConn, this));
         poller_->EpollAdd(weakupChannel_, 0);
-        std::cout<<"weakupFd "<< weakupFd_<<std::endl;
+        //std::cout<<"weakupFd "<< weakupFd_<<std::endl;
 }
 
 

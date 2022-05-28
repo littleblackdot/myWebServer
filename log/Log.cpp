@@ -1,6 +1,6 @@
 #include "Log.h"
-#include "CurrentThread.h"
-#include "Thread.h"
+#include "../CurrentThread.h"
+#include "../Thread.h"
 #include "AsynLog.h"
 #include <assert.h>
 #include <iostream>

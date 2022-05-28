@@ -71,32 +71,52 @@ CMAKE_BINARY_DIR = /home/little/little/Code_C++/myWebServer/build
 
 # The main recursive "all" target.
 all: CMakeFiles/WebServer.dir/all
+all: log/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: log/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/WebServer.dir/clean
+clean: log/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory log
+
+# Recursive "all" directory target.
+log/all: log/CMakeFiles/LogUtil.dir/all
+
+.PHONY : log/all
+
+# Recursive "preinstall" directory target.
+log/preinstall:
+
+.PHONY : log/preinstall
+
+# Recursive "clean" directory target.
+log/clean: log/CMakeFiles/LogUtil.dir/clean
+
+.PHONY : log/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/WebServer.dir
 
 # All Build rule for target.
-CMakeFiles/WebServer.dir/all:
+CMakeFiles/WebServer.dir/all: log/CMakeFiles/LogUtil.dir/all
 	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/depend
 	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/little/little/Code_C++/myWebServer/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target WebServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/little/little/Code_C++/myWebServer/build/CMakeFiles --progress-num=7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target WebServer"
 .PHONY : CMakeFiles/WebServer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/WebServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/little/little/Code_C++/myWebServer/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/little/little/Code_C++/myWebServer/build/CMakeFiles 20
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/WebServer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/little/little/Code_C++/myWebServer/build/CMakeFiles 0
 .PHONY : CMakeFiles/WebServer.dir/rule
@@ -110,6 +130,33 @@ WebServer: CMakeFiles/WebServer.dir/rule
 CMakeFiles/WebServer.dir/clean:
 	$(MAKE) -f CMakeFiles/WebServer.dir/build.make CMakeFiles/WebServer.dir/clean
 .PHONY : CMakeFiles/WebServer.dir/clean
+
+#=============================================================================
+# Target rules for target log/CMakeFiles/LogUtil.dir
+
+# All Build rule for target.
+log/CMakeFiles/LogUtil.dir/all:
+	$(MAKE) -f log/CMakeFiles/LogUtil.dir/build.make log/CMakeFiles/LogUtil.dir/depend
+	$(MAKE) -f log/CMakeFiles/LogUtil.dir/build.make log/CMakeFiles/LogUtil.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/little/little/Code_C++/myWebServer/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target LogUtil"
+.PHONY : log/CMakeFiles/LogUtil.dir/all
+
+# Build rule for subdir invocation for target.
+log/CMakeFiles/LogUtil.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/little/little/Code_C++/myWebServer/build/CMakeFiles 6
+	$(MAKE) -f CMakeFiles/Makefile2 log/CMakeFiles/LogUtil.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/little/little/Code_C++/myWebServer/build/CMakeFiles 0
+.PHONY : log/CMakeFiles/LogUtil.dir/rule
+
+# Convenience name for target.
+LogUtil: log/CMakeFiles/LogUtil.dir/rule
+
+.PHONY : LogUtil
+
+# clean rule for target.
+log/CMakeFiles/LogUtil.dir/clean:
+	$(MAKE) -f log/CMakeFiles/LogUtil.dir/build.make log/CMakeFiles/LogUtil.dir/clean
+.PHONY : log/CMakeFiles/LogUtil.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

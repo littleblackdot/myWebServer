@@ -68,6 +68,9 @@ CMakeFiles/WebServer.dir/HttpData.cpp.o: ../HttpData.h
 CMakeFiles/WebServer.dir/HttpData.cpp.o: ../MutexLock.h
 CMakeFiles/WebServer.dir/HttpData.cpp.o: ../Time.h
 CMakeFiles/WebServer.dir/HttpData.cpp.o: ../Util.h
+CMakeFiles/WebServer.dir/HttpData.cpp.o: ../log/FixedBuffer.h
+CMakeFiles/WebServer.dir/HttpData.cpp.o: ../log/Log.h
+CMakeFiles/WebServer.dir/HttpData.cpp.o: ../log/LogStream.h
 CMakeFiles/WebServer.dir/HttpData.cpp.o: ../noncopyable.h
 
 CMakeFiles/WebServer.dir/Thread.cpp.o: ../Condition.h
@@ -100,6 +103,9 @@ CMakeFiles/WebServer.dir/WebServer.cpp.o: ../Time.h
 CMakeFiles/WebServer.dir/WebServer.cpp.o: ../Util.h
 CMakeFiles/WebServer.dir/WebServer.cpp.o: ../WebServer.cpp
 CMakeFiles/WebServer.dir/WebServer.cpp.o: ../WebServer.h
+CMakeFiles/WebServer.dir/WebServer.cpp.o: ../log/FixedBuffer.h
+CMakeFiles/WebServer.dir/WebServer.cpp.o: ../log/Log.h
+CMakeFiles/WebServer.dir/WebServer.cpp.o: ../log/LogStream.h
 CMakeFiles/WebServer.dir/WebServer.cpp.o: ../noncopyable.h
 
 CMakeFiles/WebServer.dir/main.cpp.o: ../Channel.h
